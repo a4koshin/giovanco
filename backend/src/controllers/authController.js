@@ -2,9 +2,9 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "../model/userModel.js";
 export const register = async (req, res) => {
-  const { first_name, last_name, email, password } = req.body;
+  const { first_name, last_name, email, isAdmin, password } = req.body;
 
-  if (!first_name || !last_name || !email || !password)
+  if (!first_name || !last_name || !email || !isAdmin || !password)
     return res
       .status(400)
       .json({ success: false, message: "All fields are requierd" });
@@ -30,6 +30,7 @@ export const register = async (req, res) => {
       first_name,
       last_name,
       email,
+      isAdmin,
       password: hashedPass,
     });
 
